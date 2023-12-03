@@ -1,46 +1,18 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
-import NewsKizi from "./components/NewsKizi";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import React from "react";
+import DetailScreen from "./screens/DetailScreen";
+import NewsScreen from "./screens/NewsScreen";
 
-const URI =
-  "https://newsapi.org/v2/top-headlines?country=jp&category=entertainment&apiKey=ba3f34e9002f443bbdcf1b4729455e05";
+const Stack = createStackNavigator();
 
-export default function App() {
-  const [news, setNews] = useState([]);
-
-  useEffect(() => {
-    getNews();
-  }, []);
-
-  const getNews = async () => {
-    const response = await axios.get(URI);
-    //console.log(response);
-    setNews(response.data.articles);
-  };
-
+export default App = () => {
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={news}
-        renderItem={({ item }) => (
-          <NewsKizi
-            imageuri={item.urlToImage}
-            title={item.title}
-            subtext={item.publishedAt}
-          />
-        )}
-        keyExtractor={(item, index) => index.toString()}
-      />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="ニュース" component={NewsScreen} />
+        <Stack.Screen name="詳細ページ" component={DetailScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    // alignItems: "center", //横の移動
-    // justifyContent: "center", //縦の移動
-  },
-});
+};

@@ -1,16 +1,29 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-const NewsKizi = ({ imageuri, title, subtext }) => {
+const NewsKizi = ({ imageuri, title, subtext, onPress }) => {
+  var date = new Date(subtext);
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  var koukaihiduke = year + "年" + month + "月" + day + "日";
+
   return (
-    <View style={styles.box}>
-      <View style={styles.mozibox}>
-        <Text style={styles.Text}>{title}</Text>
-        <Text style={styles.subText}>{subtext}</Text>
+    <TouchableOpacity style={styles.box} onPress={onPress}>
+      <View style={styles.box}>
+        <View style={styles.mozibox}>
+          <Text numberOfLines={3} style={styles.Text}>
+            {title}
+          </Text>
+          <Text style={styles.subText}>{koukaihiduke}</Text>
+        </View>
+        <View style={styles.gazobox}>
+          <Image
+            style={{ width: 100, height: 100 }}
+            source={{ uri: imageuri }}
+          />
+        </View>
       </View>
-      <View style={styles.gazobox}>
-        <Image style={{ width: 100, height: 100 }} source={{ uri: imageuri }} />
-      </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -34,7 +47,7 @@ const styles = StyleSheet.create({
 
   mozibox: {
     flex: 1,
-    backgroundColor: "steelblue",
+    //backgroundColor: "steelblue",
     padding: 16,
     justifyContent: "space-between", //テキストとサブの感覚をあける
   },
@@ -50,6 +63,6 @@ const styles = StyleSheet.create({
 
   subText: {
     fontSize: 12,
-    color: "white",
+    color: "blue",
   },
 });
