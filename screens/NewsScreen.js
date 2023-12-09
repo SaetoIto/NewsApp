@@ -15,8 +15,8 @@ export default function NewsScreen({ navigation }) {
 
   const getNews = async () => {
     const response = await axios.get(URI);
-    console.log(response);
-    setNews(response.data.articles);
+    //console.log(response);
+    setNews(response.data.articles); //useStateへ
   };
 
   return (
