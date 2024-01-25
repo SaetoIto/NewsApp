@@ -1,7 +1,9 @@
+import { FontAwesome } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
+
 import DetailScreen from "./screens/DetailScreen";
 import NewsScreen from "./screens/NewsScreen";
 import WeatherScreen from "./screens/WeatherScreen";
@@ -25,6 +27,20 @@ const WeatherStacks = () => {
     </Stack.Navigator>
   );
 };
+
+const screenOption = ({ route }) => ({
+  tabBarIcon: ({ color, size }) => {
+    let iconName;
+    if (route.name === "ニュース") {
+      iconName = "newspaper-o";
+    } else if (route.name === "天気予報") {
+      iconName = "sun-o";
+    }
+
+    // You can return any component that you like here!
+    return <FontAwesome name={iconName} size={size} color={color} />;
+  },
+});
 
 export default App = () => {
   return (
