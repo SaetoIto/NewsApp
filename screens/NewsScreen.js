@@ -11,12 +11,12 @@ export default function NewsScreen({ navigation }) {
 
   useEffect(() => {
     getNews();
-  }, []);
+  }, []); //第二引数が空の配列の場合はリロードした際に発火される
 
   const getNews = async () => {
-    const response = await axios.get(URI);
-    console.log(response);
-    setNews(response.data.articles);
+    const response = await axios.get(URI); //axiosを用いてURIよりデータを引っ張て来る
+    //console.log(response);
+    setNews(response.data.articles); //data.articles配列から
   };
 
   return (
